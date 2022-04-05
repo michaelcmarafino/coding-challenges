@@ -88,23 +88,60 @@
 
             // Array.prototype.filter()
             // 1. Filter the list of inventors for those who were born in the 1500's
+            let inventorsIn1500s = inventors.filter(
+                (person) => person.year <= 1599 && person.year >= 1500
+            )
+            console.log(inventorsIn1500s)
 
             // Array.prototype.map()
             // 2. Give us an array of the inventors first and last names
+            let inventorNames = inventors.map(
+                (person) => `${person.first} ${person.last}`
+            )
+            console.log(inventorNames)
 
             // Array.prototype.sort()
             // 3. Sort the inventors by birthdate, oldest to youngest
+            let oldToYoung = inventors.sort((a, b) => a.year - b.year)
+            console.log(oldToYoung)
 
             // Array.prototype.reduce()
             // 4. How many years did all the inventors live all together?
 
-            // 5. Sort the inventors by years lived
+            let totalAge = inventors.reduce(
+                (acc, person) => acc + person.passed - person.year,
+                0
+            )
+            console.log(totalAge)
 
+            // 5. Sort the inventors by years lived
+            let inventorsLived = inventors
+                .map((person) => person.passed - person.year)
+                .sort((a, b) => a - b)
+
+            console.log(inventorsLived)
             // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
             // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+            let boulevards = [
+                "Boulevard des Capucines",
+                "Boulevard de la Chapelle",
+                "Boulevard de Clichy",
+                "Boulevard du Crime",
+                "Boulevard Malesherbes",
+                "Boulevard Marguerite-de-Rochechouart",
+                "Boulevard Montmartre",
+                "Boulevard du Montparnasse",
+            ]
+
+            let deBoulies = boulevards.filter((boulie) => boulie.includes("de"))
+
+            console.log(deBoulies)
+
             // 7. sort Exercise
             // Sort the people alphabetically by last name
+            let alphabetically = people.sort((a, b) => a.localeCompare(b))
+            console.log(alphabetically)
 
             // 8. Reduce Exercise
             // Sum up the instances of each of these
@@ -124,6 +161,9 @@
                 "car",
                 "truck",
             ]
+
+            let sumOfStrings = data.reduce((acc, c) => acc + c)
+            console.log(sumOfStrings)
         </script>
     </body>
 </html>
