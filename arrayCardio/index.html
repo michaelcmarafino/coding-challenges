@@ -88,27 +88,27 @@
 
             // Array.prototype.filter()
             // 1. Filter the list of inventors for those who were born in the 1500's
-            let inventorsIn1500s = inventors.filter(
-                (person) => person.year <= 1599 && person.year >= 1500
+            const inventorsIn1500s = inventors.filter(
+                person => person.year <= 1599 && person.year >= 1500
             )
             console.log(inventorsIn1500s)
 
             // Array.prototype.map()
             // 2. Give us an array of the inventors first and last names
-            let inventorNames = inventors.map(
-                (person) => `${person.first} ${person.last}`
+            const inventorNames = inventors.map(
+                person => `${person.first} ${person.last}`
             )
             console.log(inventorNames)
 
             // Array.prototype.sort()
             // 3. Sort the inventors by birthdate, oldest to youngest
-            let oldToYoung = inventors.sort((a, b) => a.year - b.year)
+            const oldToYoung = inventors.sort((a, b) => a.year - b.year)
             console.log(oldToYoung)
 
             // Array.prototype.reduce()
             // 4. How many years did all the inventors live all together?
 
-            let totalAge = inventors.reduce(
+            const totalAge = inventors.reduce(
                 (acc, person) => acc + person.passed - person.year,
                 0
             )
@@ -116,7 +116,7 @@
 
             // 5. Sort the inventors by years lived
             let inventorsLived = inventors
-                .map((person) => person.passed - person.year)
+                .map(person => person.passed - person.year)
                 .sort((a, b) => a - b)
 
             console.log(inventorsLived)
@@ -134,7 +134,7 @@
                 "Boulevard du Montparnasse",
             ]
 
-            let deBoulies = boulevards.filter((boulie) => boulie.includes("de"))
+            let deBoulies = boulevards.filter(boulie => boulie.includes("de"))
 
             console.log(deBoulies)
 
@@ -162,8 +162,15 @@
                 "truck",
             ]
 
-            let sumOfStrings = data.reduce((acc, c) => acc + c)
-            console.log(sumOfStrings)
+            const transportation = data.reduce((obj, item) => {
+                if (!obj[item]) {
+                    obj[item] = 0
+                }
+                obj[item]++
+                return obj
+            }, {})
+
+            console.log(transportation)
         </script>
     </body>
 </html>
