@@ -58,4 +58,52 @@
 // multiplyNumeric(menu)
 // console.log(menu)
 
-// Objects references and copying
+// Objects methods, "this"
+
+// OOP Calculator
+
+// let calculator = {
+//     read() {
+//         let a = Number(prompt("First value?"))
+//         let b = Number(prompt("Second value?"))
+//         this.a = a
+//         this.b = b
+//     },
+//     sum() {
+//         return this.a + this.b
+//     },
+//     multiply() {
+//         return this.a * this.b
+//     },
+// }
+
+// console.log(calculator.read())
+// console.log(calculator.a)
+// console.log(calculator.b)
+// alert(calculator.sum())
+// alert(calculator.multiply())
+let ladder = {
+    step: 0,
+    up() {
+        this.step++
+        return this
+    },
+    down() {
+        this.step--
+        return this
+    },
+    showStep: function () {
+        // shows the current step
+        alert(this.step)
+        return this
+    },
+}
+
+// ladder.up()
+// ladder.up()
+// ladder.down()
+// ladder.showStep() // 1
+// ladder.down()
+// ladder.showStep() // 0
+
+ladder.up().up().down().showStep().down().showStep() // shows 1 then 0
