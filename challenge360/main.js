@@ -19,6 +19,7 @@ function decipherThis(str) {
             .filter(let => nums.includes(let))
             .join("")
     })
+
     let otherLetters = str.split(" ").map(word => {
         return word
             .split("")
@@ -36,6 +37,7 @@ function decipherThis(str) {
                 }
             })
     })
+
     return otherLetters
         .map((el, i) => (el = String.fromCharCode(firstLetters[i]) + el))
         .join(" ")
