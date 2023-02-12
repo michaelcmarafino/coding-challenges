@@ -13,9 +13,9 @@ function solve(s) {
         } else if (letters.includes(el)) {
             answer[1] += 1
         } else if (numbers.includes(el)) {
-            answer[2] += 2
+            answer[2] += 1
         } else {
-            answer[3] += 3
+            answer[3] += 1
         }
     }
     return answer
