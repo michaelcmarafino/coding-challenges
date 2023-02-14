@@ -17,7 +17,7 @@ function hamming(a, b) {
     let bigger = a.length > b.length ? a.length : b.length
     let total = 0
     for (let i = 0; i < bigger; i++) {
-        if (a[i] == b[i]) {
+        if (a[i] !== b[i]) {
             total++
         }
     }
