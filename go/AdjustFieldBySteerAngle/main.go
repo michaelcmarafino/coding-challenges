@@ -3,12 +3,28 @@ package main
 import "fmt"
 
 func main() {
-	initialAgvAngle := 270
-	endAgvAngle := 180
-	for i := initialAgvAngle; i >= endAgvAngle; i-- {
-		fieldExtended := ExtendFieldBySteerAngle(initialAgvAngle, i, 90, 10, beg)
+	initialAgvAngleInc := 0
+	endAgvAngleInc := 270
+	fmt.Println("INCREASING ANGLE")
+
+	for i := initialAgvAngleInc; i <= endAgvAngleInc; i++ {
+		fieldExtended := ExtendFieldBySteerAngle(initialAgvAngleInc, i, endAgvAngleInc-initialAgvAngleInc, 10, mid)
 		fmt.Printf("At %v degrees, field is extended: %v\n", i, fieldExtended)
 	}
+	fmt.Println("////////////////////////////////////")
+	fmt.Println("")
+
+	initialAgvAngleDec := 360
+	endAgvAngleDec := 270
+	fmt.Println("DECREASING ANGLE")
+
+	for j := initialAgvAngleDec; j >= endAgvAngleDec; j-- {
+		fieldExtended := ExtendFieldBySteerAngle(initialAgvAngleDec, j, initialAgvAngleDec-endAgvAngleDec, 10, mid)
+		fmt.Printf("At %v degrees, field is extended: %v\n", j, fieldExtended)
+
+	}
+	fmt.Println("////////////////////////////////////")
+	fmt.Println("")
 }
 
 const (
@@ -17,20 +33,21 @@ const (
 	beg
 )
 
-var angleIncreasing, angleDecreasing bool
-
 func ExtendFieldBySteerAngle(initialAngle, currentAngle, degreesInTurn, degreeAmountToExtend, whereToExtendInTurn int) bool {
-	if currentAngle > initialAngle {
-		angleIncreasing = true
-		angleDecreasing = false
-		endAngle := degreesInTurn + initialAngle
-	} else if currentAngle < initialAngle || (initialAngle == 0 && currentAngle <= 1){
+	var endAngle int
+	var angleIncreasing, angleDecreasing bool
+
+	if currentAngle < initialAngle || (initialAngle < 5 && currentAngle > 270) {
 		angleDecreasing = true
 		angleIncreasing = false
 		if initialAngle == 0 {
 			initialAngle = 360
 		}
-		endAngle := initialAngle - degreesInTurn
+		endAngle = initialAngle - degreesInTurn
+	} else if currentAngle > initialAngle {
+		angleIncreasing = true
+		angleDecreasing = false
+		endAngle = degreesInTurn + initialAngle
 	} else {
 		angleDecreasing = false
 		angleIncreasing = false
@@ -39,13 +56,19 @@ func ExtendFieldBySteerAngle(initialAngle, currentAngle, degreesInTurn, degreeAm
 	case end:
 		if angleIncreasing && currentAngle >= endAngle-degreeAmountToExtend {
 			return true
-		} else if angleDecreasing && currentAngle <= 
+		} else if angleDecreasing && currentAngle <= endAngle+degreeAmountToExtend {
+			return true
+		}
 	case mid:
-		if angleIncreasing && (currentAngle >= degreesInTurn/2-degreeAmountToExtend/2 || currentAngle <= degreesInTurn/2+degreeAmountToExtend/2) {
+		if angleIncreasing && (currentAngle >= (initialAngle+((degreesInTurn/2)-(degreeAmountToExtend/2))) && currentAngle <= (initialAngle+((degreesInTurn/2)+(degreeAmountToExtend/2)))) {
+			return true
+		} else if angleDecreasing && (currentAngle >= (endAngle+((degreesInTurn/2)-(degreeAmountToExtend/2))) && currentAngle <= (endAngle+((degreesInTurn/2)+(degreeAmountToExtend/2)))) {
 			return true
 		}
 	case beg:
 		if angleIncreasing && currentAngle <= initialAngle+degreeAmountToExtend {
+			return true
+		} else if angleDecreasing && currentAngle >= initialAngle-degreeAmountToExtend {
 			return true
 		}
 	}
