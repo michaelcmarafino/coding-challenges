@@ -1,1 +1,0 @@
-urrentAngle >= endAngle-degreeAmountToExtend 
